@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>UnifiDocs</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>UnifiDocs</h1>
+    <div class="controls">
+      <label>Documento <input id="docId" value="doc-A" /></label>
+      <label>Cliente <input id="clientId" value="web-1" /></label>
+      <button id="connectBtn">Abrir</button>
+      <button id="snapshotBtn" title="Forçar um snapshot síncrono (REST)">Salvar</button>
+      <span id="status" class="status disconnected">desconectado</span>
+      <span id="seq" class="seq">seq 0</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="editor-pane">
+      <textarea id="editor" placeholder="Abra um documento para começar a editar..." disabled></textarea>
+    </section>
+    <aside class="side">
+      <div class="panel">
+        <h2>Presença</h2>
+        <ul id="presence"></ul>
+      </div>
+      <div class="panel">
+        <h2>Ortografia</h2>
+        <ul id="spellcheck" class="annotations"></ul>
+      </div>
+      <div class="panel">
+        <h2>Formatação</h2>
+        <ul id="format" class="annotations"></ul>
+      </div>
+    </aside>
+  </main>
+
+  <footer>
+    <small>
+      As edições ao vivo trafegam por WebSocket (assíncrono); abrir/salvar usam REST (síncrono).
+      As anotações são produzidas pelos workers de segundo plano e enviadas via Redis pub/sub.
+    </small>
+  </footer>
+
+  <script src="editor.js"></script>
+</body>
+</html>
