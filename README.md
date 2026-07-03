@@ -11,14 +11,16 @@ Um editor de documentos em que vários clientes remotos visualizam e editam os m
 
 1. Crie uma instância EC2 (Ubuntu, t3.small+).
 2. TCP `8080` (REST + UI) e `8081` (WebSocket) a partir do seu IP (ou `0.0.0.0/0`).
-3. Instale Docker + Compose.
-4. Copie o projeto para a instância.
-5. Execute:
+3. Copie o projeto para a instância.
+4. Execute:
    ```bash
-   cd UnifiDocs
+   cd trabalho-final-grupo-09
+   bash scripts/aws_ec2_setup.sh   
+   newgrp docker                 
    make up
    ```
-6. Acesse `http://<IP_EC2>:8080`. Para apontar os clientes simulados para a instância:
+5. Acesse `http://<IP_EC2>:8080` para vizualizar a aplicação.
+6. Para apontar os clientes simulados para a instância:
    ```bash
    GW_HTTP=http://<IP_EC2>:8080 GW_WS=ws://<IP_EC2>:8081 \
      python3 clients/sim_client.py converge --doc doc-A --clients 5 --ops 12
